@@ -13,7 +13,7 @@ class PurchaseHistoryController extends Controller
     {
         $purchaseHistories = PurchaseHistory::all();
         foreach($purchaseHistories as $key => $purchaseHistory) {
-            $purchaseHistories[$key]['ingredient'] = Http::get(env('RECIPES') . '/ingredients/' . $purchaseHistory->ingredient_id)->json();
+            $purchaseHistories[$key]['ingredient'] = Http::get(env('RECIPES_HOST') . '/ingredients/' . $purchaseHistory->ingredient_id)->json();
         }
         return response()->json($purchaseHistories);
     }

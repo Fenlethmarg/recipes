@@ -66,7 +66,7 @@ class PurchaseIngredients implements ShouldQueue
                 $stock->quantity -= $quantityNeeded;
                 $stock->save();
             }
-            Http::post(env('ORDERS') . '/orders/' . $this->orderId . '/ready');
+            Http::post(env('ORDERS_HOST') . '/orders/' . $this->orderId . '/ready');
         }
     }
 

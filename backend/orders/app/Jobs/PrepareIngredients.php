@@ -28,6 +28,6 @@ class PrepareIngredients implements ShouldQueue
      */
     public function handle(): void
     {
-        Http::post(env('STORE') . '/stocks/prepare', ['ingredients' => $this->ingredients, 'orderId' => $this->orderId]);
+        Http::post(env('STORE_HOST') . '/stocks/prepare', ['ingredients' => $this->ingredients, 'orderId' => $this->orderId]);
     }
 }
