@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function store()
     {
-        $response = Http::get('127.0.0.1:8002/recipes/random');
+        $response = Http::get(env('RECIPES') . '/recipes/random');
         $recipeId = $response['id'];
         $order = Order::create([
             'recipe_id' => $recipeId,
@@ -31,7 +31,7 @@ class OrderController extends Controller
 
     foreach ($orders as $key => $order) {
         try {
-            $response = Http::get('127.0.0.1:8002/recipes/' . $order->recipe_id)->json();
+            $response = Http::get(env('RECIPES') . '/recipes/' . $order->recipe_id)->json();
             $orders[$key]['recipe'] = $response['name'];
 
             $orders[$key]['status'] = OrderStatus::getDescription($order->status);

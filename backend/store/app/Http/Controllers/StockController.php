@@ -23,7 +23,7 @@ class StockController extends Controller
     {
         $stocks = [];
         try {
-            $ingredients = Http::get('127.0.0.1:8002/ingredients');
+            $ingredients = Http::get(env('RECIPES') . '/ingredients');
             foreach ($ingredients->json() as $key => $ingredient) {
                 $stocks[$key] = Stock::where('ingredient_id', $ingredient['id'])->first();
                 $stocks[$key]['ingredient'] = $ingredient;

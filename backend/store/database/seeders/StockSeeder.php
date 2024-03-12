@@ -14,7 +14,7 @@ class StockSeeder extends Seeder
      */
     public function run(): void
     {
-        $ingredients = Http::get('127.0.0.1:8002/ingredients');
+        $ingredients = Http::get(env('RECIPES') . '/ingredients');
         foreach ($ingredients->json() as $ingredient) {
             Stock::create(['ingredient_id' => $ingredient['id'], 'quantity' => 5]);
         }
