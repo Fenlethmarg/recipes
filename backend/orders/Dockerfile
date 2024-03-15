@@ -30,6 +30,6 @@ RUN composer install --no-ansi --no-dev --no-interaction --no-progress --optimiz
 
 COPY . /var/www/
 
-EXPOSE 8001
+EXPOSE 9000
 
 CMD ["php-fpm"]
