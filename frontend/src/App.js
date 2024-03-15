@@ -46,7 +46,7 @@ function App() {
 
   const getOrders = () => {
     axios
-      .get("http://127.0.0.1:8001/orders/")
+      .get("http://" + process.env.REACT_APP_API_URL + "/orders/orders")
       .then((response) => {
         setOrders(response.data);
       })
@@ -55,7 +55,7 @@ function App() {
 
   const getStocks = () => {
     axios
-      .get("http://127.0.0.1:8003/stocks/")
+      .get("http://" + process.env.REACT_APP_API_URL + "/store/stocks/")
       .then((response) => {
         setStocks(response.data);
       })
@@ -64,7 +64,7 @@ function App() {
 
   const getPurchaseHistory = () => {
     axios
-      .get("http://127.0.0.1:8003/purchase-histories/")
+      .get("http://" + process.env.REACT_APP_API_URL + "/store/purchase-histories/")
       .then((response) => {
         setPurchaseHistories(response.data);
       })
@@ -73,7 +73,7 @@ function App() {
 
   const getRecipes = () => {
     axios
-      .get("http://127.0.0.1:8002/recipes/")
+      .get("http://" + process.env.REACT_APP_API_URL + "/recipes/recipes/")
       .then((response) => {
         setRecipes(response.data);
       })
@@ -82,7 +82,7 @@ function App() {
 
   const orderFood = () => {
     axios
-      .post("http://127.0.0.1:8001/orders/")
+      .post("http://" + process.env.REACT_APP_API_URL + "/orders/orders/")
       .then(() => {
         getAccordingOption();
       })

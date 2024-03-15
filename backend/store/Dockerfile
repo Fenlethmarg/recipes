@@ -1,9 +1,4 @@
-FROM php:8.2-fpm
-
-COPY composer*.json /var/www/
-
-WORKDIR /var/www/
-
+FROM php:8.2
 RUN apt-get update && apt-get install -y \
     build-essential \
     libzip-dev \
@@ -20,16 +15,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && apt-get install -y procps inetutils-ping && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pdo_mysql zip exif pcntl
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install gd
-
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+WORKDIR /app
+COPY . /app
+RUN composer install
 
-RUN composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
-
-COPY . /var/www/
-
+CMD php artisan serve --host=0.0.0.0 --port=9000 & php artisan queue:work
 EXPOSE 9000
-
-CMD ["php-fpm"]
